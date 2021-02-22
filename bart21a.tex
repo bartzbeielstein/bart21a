@@ -58,7 +58,7 @@
 
 \begin{document}
 
-\title{Resource Planning for Hospitals Under Special Consideration of the COVID-19 Pandemic:\\ Optimization and Sensitivity Analysis\\
+\title{Optimization and Adaptation of a Resource Planning Tool for Hospitals Under Special Consideration of the COVID-19 Pandemic
 \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
@@ -308,217 +308,33 @@ Therefore, the \gls{SPOT} algorithm was chosen~\citep{Bart17parxiv}.
 To accelerate the \gls{SPOT}, simulations were run in parallel.
 Besides robust and relatively fast optimizations, \gls{SPOT} provides an additional advantage: surrogate models used by the optimizer can be used (``recycled'') for a sensitivity analysis. 
 
-\section{Model-Based Sensitivity Analysis}\label{sec:sa}
-After describing the selection of the simulation model and the optimizer, we discuss 
-methods to analyze results from the optimization-via-simulation approach. 
-As per \citet{Ustinov15}, at the time of obtaining the best possible outcome from a model numerically, the analytical relation between the model input parameters and
-corresponding outcomes are not observed closely. This oversight results in the model potentially containing parameters that are not required. This is where sensitivity analysis provides much needed clarity.
-Sensitivity analysis can be used to determine the robustness of model predictions to parameter values and to discover parameters with a high impact~\citep{Rosa18}. There has been extensive research on sensitivity analysis as applied to modeling in various fields. Some of these approaches are highly applicable to analyzing parameter importance for high dimensional models like \babsimhospital. 
-
-\citet{Ahmed20} describe varying parameter values by very small increments to measure and compare the impact of the change on a model for forecasting of COVID-19 using logistic growth models. The study involves optimization algorithms such as Nelder-Mead, Levenberg-Marquardt, and Trust-Region-Reflective~\citep{NelderM65}. The authors use their technique to gather information across these algorithms without the intention of simplifying the modeling process. 
-The technique has also been suggested by~\citet{Kleijnen97}, who defines sensitivity analysis as what-if analysis.
-There, it is observed how the response of model changes, for a change in input parameters. 
-
-Part of our analysis builds on the ideas of \citet{Ahmed20} and \citet{Kleijnen97}, more specifically we use a similar approach to measure importance by varying parameter values. Subsequently, the conclusions from this and other analytical techniques are combined and used to provide an objective preselection of parameters to be tested for removal from the optimization process.
-
-The approach presented in this paper can be referred to as \gls{SMBSA}, because it uses \gls{SMBO} data and information to perform the sensitivity analysis.
-We use the following models in \gls{SMBSA}:
-\begin{description}
-\item[Linear regression models] were included, because they are well established and considered standard in many classical sensitivity analysis scenarios~\citep{Klei04e}.
-\item[Kriging] is a frequently used surrogate in  \gls{SMBO}. It is also referred to as Gaussian process regression~\citep{Scho97a}.
-In Kriging, a distance-based correlation structure is determined with the observed data~\citep{Forr08a}. 
-Depending on the modeled function, Kriging can deliver accurate predictions even if only a few data points are available.
-Additionally, it is often favored for being able to estimate its own prediction uncertainty. 
-\item[Random Forests]  were initially introduced by~\citet{breiman2001random}.
-They use an ensemble of tree predictors where each tree is fitted to a random subset of the data.
-Random Forests are well-established as they are very robust to different variable classes.
-They can be applied to classification as well as prediction tasks with continuous, mixed, or discrete data.
-Among others, random forests gained publicity in being used for regression and classification through~\citet{liaw2002classification}. 
-\end{description} 
-
-
-\section{Experimental Setup}\label{sec:experiments}
-
-\subsection{Steps Performed in this Analysis}
-To ensure a detailed and comprehensive understanding of the parameters, the following procedures were employed. 
-
-\subsubsection*{Step 1: Domain Analysis}
-A domain analysis provided for a qualitative comparison and a preliminary classification of high and low importance parameters, based on their expected real-life impact. Each parameter was discussed and its relation to the hospital resource allocation was evaluated. The purpose was not to create a comprehensive ranking of the 29 parameters but rather to identify parameters with a significantly higher or lower expected impact than all others, e.g., parameters that would not affect the hospital admissions at all.
-
-\subsubsection*{Step 2: Experimental Exploration}
-A set of \glspl{LHD} \cite{McKa79a} were generated to create evenly spread out sample points over the entire feasible search space.
-By doing so, we tried to ensure that we obtain a globally valid estimate of parameter importance that is less affected by local anomalies.
-The obtained data were fit Kriging-, Linear-, and Random Forest models for further analysis.
-
-\subsubsection*{Step 3: Importance Index}
-The \emph{importance index}\/ of the $i$-th parameter was calculated as $P_i = \sum_{k=1}^{n} O_i$,
-where $O_i$ is the position of the $i$-th parameter $x_i$ in the sequence of parameters sorted from most important to least important, i.e., descending, 
-and $n$ is the number of runs (repeats) of the modeling technique. 
-For our experiment, $i \in \{ 1,2, \ldots, 29\}$, with $n = 20$ and $\max(O_i)= 29$.
-The \emph{normalized importance index}\/ was determined  as 
-\begin{equation}\label{eq:nimp}
-    P^{\ast}_{i} = \frac{1}{n \times \max(O_i)}\times\sum_{k=1}^{n} O_i.
-\end{equation} 
-The normalized values can be seen on Figure \ref{fig:importanceByType}.
-Although the models have their own numerical estimates for importance, this data was not taken into account but rather only the ranking of the importance of the parameters. Ignoring this potentially valuable information was crucial to enable us to perform cross-model comparisons.
-Due to the large number of parameters, the linear regression model used main effects only. 
-
-\subsubsection*{Step 4: Parameter Impact on the Simulation Error}
-Apart from the estimation of the parameter importance through different  modeling techniques, another test was performed similar to the approach presented in~\cite{Ahmed20}. 
-The sets of parameters from the \gls{SPOT} initial design were used.
-For one parameter set, $n$ simulation repeats were performed and the mean simulation error $E_{\mu}$ was calculated.
-Then, each parameter, one by one, was slightly changed and a new mean simulation error $E_{\mu_i}$ was determined for the same number of simulations.  
-Finally, we calculated the differences in errors for each parameter 
-\begin{equation}\label{eq:delta}
-\Delta E_{x_i} =  \frac{|E_{\mu}-E_{\mu_i}|}{E_{\mu}}\times 100 \%.
-\end{equation}
-The index $i$ represents the changed parameter number. 
-This experiment was repeated for $k=33$ available parameter configurations. 
-Results are shown in Figure \ref{fig:errorChangebarplot}.
-
-\subsubsection*{Step 5: Parameter Plots}
-Selected parameters were compared using parameter plots
-that illustrate the impact of each parameter on the model error. 
-These experiments aim to bring further clarity on the parameter interaction and importance.
-The analysis based on the above described experiments is discussed in more detail in the next section. 
-Its purpose is to enable a reliable proposal for most and least important parameters.
-
-\subsubsection*{Step 6: Optimization Tests}\label{sec:optimTests}
-As a final step, after sufficient information is gathered on the parameter importance, 
-an attempt to use the information in order to gain optimization efficiency can be made. 
-Parameters which only marginally change the outcome of a simulation could potentially be excluded from the optimization. 
-Then, the very limited budget of the optimizer can be spent more efficiently on the remaining more important parameters. 
-
-A set of experiments was executed to investigate this question.
-The SPOT-Direct optimizer was run for 30 repeats in an attempt to tune the simulations parameters.
-Then, one parameter after another was excluded iteratively from the optimization.
-The excluded parameters are fixed to the mean between their bounds and fed into the simulation together with the other parameters.
-Therefore, they are still part of the simulation, but are not being optimized.
-This part provides a proof of concept by observing the actual optimization performance with optimization limited to only selected parameters. 
-
-\subsection{Reproducibility, CI/CD, and Testing}\label{sec:reproduce}
-
-The number of corona virus infections strongly varies over time and also for each tested region. 
-To ensure reproducibility of our experiments, it is therefore necessary to select and fix the specific data that was chosen.
-As this project was initiated together with local health officials, the data for the German city of Cologne was chosen for the in-depth analysis.
-Each simulation is initially fed with four weeks worth of cases as a \emph{warm-up}. 
-After that, the actual evaluation time-frame starts in which the quality of the simulation is measured. 
-Field data is only required for this  second phase.
-The infection data was therefore chosen from 2020/10/12 to 2021/01/14.
-The field data from 2020/11/09 to 2021/01/14.
-While we had to choose a specific region and period for the experiments described here, they can easily be adapted s for other regions or time periods.
-Furthermore, as this project aims to make the tools to create such analysis available to the public, all software required to perform the experiments and simulations is available online: (Link removed for anonymization).
-
-The data that \babsimhospital uses is constantly growing and changing.
-Similarly, features of the \babsimhospital software are added or changed continuously.
-Therefore, it is crucial to maintain a \gls{CI} process. 
-It has six stages: the \texttt{install}, \texttt{test}, and \texttt{deploy} stages integrate new features and code changes reliably.
-The \texttt{optimparas} stage runs the parameter optimization process for each region (e.g., country / state / district).
-The \texttt{preload} stage precomputes results so users can analyze the results interactively. 
-Lastly, the \texttt{updatedata} stage is responsible for updating the production data and performing the \gls{ETL} process described in Section~\ref{sec:data}.
-The \gls{CICD} process is fully-automated, using a GitLab server.
-
-To automatically ensure that the simulation runs without errors, we developed a series of tests using the R package \textsc{testthat}~\citep{Wick11a}. 
-Different possible paths of the patients were simulated deterministically as well as stochastically. 
-Resulting values were compared to the expected resource usage and durations.
+\section{Optimization}\label{sec:sa}
 
 \section{Results}\label{sec:results}
 
-\subsection{Domain Analysis}
-As described in more detail in \emph{Step 1. Domain Analysis} of Section \ref{sec:experiments}, a domain analysis was performed on the 29 parameters used by the simulation~\citep{Anon21c}.
-%\cite{Bartz20}. 
-%TODO: anonymized. replace for cam-ready.
-Three parameters were established as potentially holding the highest level of importance and three as being potentially irrelevant.
 
 \begin{compactitem} 
-\item[$x_{14}$:] The parameter \texttt{FactorPatientsInfectedToHospital} is one of the most important parameters in this simulation. It reflects the percentage of infected people who have to be admitted to the hospital. This affects the general number of infected people that come into the hospital system and is a measure of the severity of the virus.
-\item[$x_{13}$:] The parameter \texttt{GammaShapeParameter} determines the distribution and, as such, can be expected to have a profound effect on the model.
-\item[$x_{26}$:] The parameter \texttt{ RiskFactorB} may also hold importance as it is an influential part of the modeling of the risk as a function of the age. Similar to $x_{14}$, this parameter would influence the overall outcome for all patients and would hold explanatory value for understanding the variations in other parameters.
+\item[$x_{6}$:] The parameter 
+\item[$x_{7}$:] The parameter
+\item[$x_{8}$:] The parameter \
 \end{compactitem}
-Parameters that are expected to have the least importance are $x_{2}$, \texttt{AmntDaysNormalToHealthy}, $x_{5}$, \texttt{AmntDaysNormalToDeath}, and $x_{19}$ \texttt{FactorPatientsNormalToDeath}. All of the above do not involve any hospital stay and should not have a significant impact on the model. 
-Other parameters also have a meaningful impact on the model but are not considered highly important. 
-For example, although there is no difference in the COVID-19 infection rates of men and women, gender $x_{27}$, \texttt{RiskMale} can be considered an important factor~\citep{Peckham20}. However, due to the higher life expectancy of women, i.e., more old female patients, and the gender imbalance of cardiovascular disease, $x_{27}$ \texttt{RiskMale} is not expected to be a dominating parameter in the model.
-
-\subsection{Empirical Analysis}
-As described in \emph{Step 3. Calculating an Importance Index} from Section \ref{sec:experiments}, 
-the normalized importance index $P^{\ast}_i$ was generated to identify a ranking of parameters with respect to Kriging-, linear-, and Random Forest models.
-To compare the results, Figure~\ref{fig:importanceByType} reports the normalized importance $P_{i}$ as assigned by each of the models.
-
-Based on the importance index, the five most important parameters (\emph{$x_{13}$, $x_{14}$, $x_{26}$, $x_{25}$ and $x_{17}$}) are the same for the three models. However, the bottom five parameters differ considerably. Only \emph{$x_{5}$} is identified to be among the five least important  parameters for all models. 
-This indicates that identifying the least important parameters is not straightforward.
-
-\begin{figure}
-  \centering
-  \includegraphics{default.pdf}
-  \caption{Importance Score Per Modeling Type. The mean importance score of the $n=20$ model runs for each type is used to calculate the normalized importance index $P^{\ast}_i$ of the $i$-th parameter $x_i$ as defined in Equation~\ref{eq:nimp}. The importance index values are displayed for each model type and the parameters are sorted by their ranking.}
-\label{fig:importanceByType}
-\end{figure}
-
-\subsection{Parameter Impact on the Simulation Error}
-
-As discussed in \emph{Step 4. Parameter Impact on the Simulation Error} of Section \ref{sec:experiments}, the purpose of this experiment is to quantify the impact on the error that is affected by a change in the value of an important parameter versus that of an unimportant one. Figure~\ref{fig:errorChangebarplot} shows the measured error from multiple re-runs of the simulation with changed parameter values. 
-The observed results do not fully confirm the assumption that changing more important parameters will have a bigger impact on the error than changing less important parameters. For parameters \emph{$x_{13}$} and \emph{$x_{14}$}, the change is noticeably more than for any other parameter, 
-confirming the hypothesis that these are two of the most influential parameters. For \emph{$x_{26}$}, however, the result is comparable to that of parameters with less estimated importance.
-
-The domain Analysis is partially confirmed: The parameters \emph{$x_{2}$} and \emph{$x_{5}$} have negligible impact.
-However, \emph{$x_{19}$} diverges from that expectation, displaying an impact similar to that of \emph{$x_{26}$}. 
-The overall results offer assurance for some conclusions of the domain analysis and are partially in compliance with the ranking of the normalized importance index. 
-
-\begin{figure}
-    \centering
-    \includegraphics{variable_error_change.pdf}
-    \caption{%
-    Change in error $\Delta E_{x_i}$ as defined in Equation~\ref{eq:delta} when changing one parameter. 
-    Mean change in error (\emph{red}\/ dot) is calculated by increasing and decreasing one parameter value 
-    by 20\% while keeping all other parameters unchanged for $k=33$ initial configurations (\emph{black}\/ points).
-    Note that the \% change is shown on a log scale.}
-\label{fig:errorChangebarplot}
-\end{figure}
-
-\subsection{Parameter Plots}
-
-Parameter plots provide a clear visualization of the range and behavior of the high and low impact parameters and serve as a useful tool to illustrate the parameter dependencies. 
-For instance, Figure~\ref{fig:model-contours} displays the range of \emph{$x_{13}$} and the relatively low impact of \emph{$x_{24}$} on the response in the middle panel. 
-In the right panel the two parameters with little importance (as per both the domain and the data-driven analysis) exhibit no impact, the magnitude of the response that is affected by them is negligible.
-Finally, in the left panel the impact of two highly important parameters on the response is shown.
-The parameter plots are a useful functionality of \gls{SPOT}, allowing for the visual representation of the parameter importance and range. They are representative of the model and help confirm the conclusions from the previous analysis.
-
-%- $x_{13}$ is consistently ranked before $x_{14}$. Can we quantify the difference using the parameter plots? Is it possible to narrow the range of values for either parameter?
-%- Same for $x_{13}$ and $x_{26}$ and $x_{14}$ to $x_{26}$. $x_{25}$ is another parameter that affects the calculation of risk. Can the parameter plots suggest a range for it that is more valid and perhaps help adjust the default values?
 
 \begin{figure*}
   \centering
-  \includegraphics{model-contour.pdf}
-  \caption{Left: 
-  Behavior of two highly important parameters, \emph{$x_{14}$} (x-axis) and \emph{$x_{13}$}. 
-  The change in response, which represents the \gls{RMSE} as defined in Equation~\ref{eq:rmse}, is significant and both parameters have a strong impact.
-  Center: Behavior of a highly important parameter \emph{$x_{13}$} (x-axis) with respect to a less important one \emph{$x_{24}$}. The change in the response illustrates the importance of \emph{$x_{13}$} for the response (\gls{RMSE}), and the absence of impact of parameter \emph{$x_{24}$}.
-  Right: Behavior of two parameters with low importance, \emph{$x_{24}$} (x-axis) and \emph{$x_{5}$}.
-  The change in the response is very small.
+   \includegraphics[width=0.7\textwidth]{default.png}
+  \caption{Real data compared to results from the \babsimhospital simulation with default parameters. Large residuals (errors), especially for normal bed and icu beds with ventilation can be observed.
+   \babsimhospital uses default parameter sets. These are based on domain knowledge (recommendations from doctors) from Germany. }
+\label{fig:default}
+\end{figure*}
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.7\textwidth]{optimized.png}
+    \caption{Real data compared to results from the \babsimhospital simulation with optimized parameters. The comparison with the results from Fig.~\ref{fig:default} shows a significant improvement. Residuals are much smaller,
+    because the simulation model parameters were adapted to the situation in UK hospitals.
   }
-  \label{fig:model-contours}
+\label{fig:optimized}
 \end{figure*}
 
-\subsection{Removing Parameters from Optimization}\label{sec:removing}
-The presented sensitivity analysis indicates that some parameters have a large impact on the resulting objective function value, while others only show little impact. 
-A natural next step is to use this knowledge to increase the optimization efficiency. 
-
-%The results of runs discussed in Section \ref{sec:optimTests} are shown in Figure \ref{fig:OptimizationTests}.
-Yet, the strong noise, which results from the simulator, also manifests in our optimization results, making it harder to observe any actual changes in optimizer efficiency when adding or removing single simulation parameters.
-Our analysis found that significant changes in optimization quality only occurred when one or more of the five most important parameters were removed from the optimization. 
-Removing less important parameters did not show significant changes, or would require more repeats for validation. 
-However, repeats of this experiment involve running multiple optimizations on an expensive to evaluate simulation, thus prohibiting in-depth studies.  
-
-Overall the experiments showed that less important parameters might be safely removed from the optimization, therefore, reducing optimizer runtime.
-More importantly though the experiments emphasize that the five most important parameters were indeed identified correctly.
-Yet, due to the huge overlaying noise, this requires further investigation in future studies.
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[width=1\linewidth]{variableRemovalBoxPlot.png}
-%    \caption{Optimizer performance while tuning the simulation parameters. Lower values indicate better results. From left to right, more and more variables are removed from the optimization and fixed to a constant. The red line fits a smoothed line through all sample points visualizing a general trend in the data.}
-%\label{fig:OptimizationTests}
-%\end{figure}
 
 \section{Discussion and Outlook}\label{sec:discussion}
 The high dimension and computational expense of the \babsimhospital simulator 
@@ -544,35 +360,7 @@ Applying model-based optimizers to this simulation problem provided good results
 Using the estimated parameter importances from the sensitivity analysis indicated that running the model-based optimizer with fewer parameters is possible without a significant quality loss. 
 Removing parameters from the model-based optimization loop can drastically decrease the optimizers runtime. 
 \end{compactenum}
-Answering (Q-4) revealed such amounts of interesting material, that we would like to dedicate its own subsection to it:
-\subsubsection*{\textbf{(Q-4)} How to integrate domain knowledge and how to analyze simulation output?}
-Our approach of determining the most important parameters has provided valuable insights into the simulator.
-While there were a few parameters that dominate the simulation quality, many more affect only slight changes in the simulation.
-In line with the conclusions from the domain analysis, \emph{$x_{13}$}, \emph{$x_{14}$} and \emph{$x_{26}$} are the parameters with the highest impact on the model.
-These findings can support practitioners in their choices.
-
-Determining the least important parameters has not been as straightforward. 
-Parameters that should have no impact on the model seem to consistently make a meaningful contribution, albeit not being among the parameters with the strongest explanatory value. 
-Comparing the importance based analysis and parameter impact on simulation error, we are able to observe that \emph{$x_{13}$} and \emph{$x_{14}$} are still consistently holding their position as the most important parameters while \emph{$x_{24}$} and \emph{$x_{5}$} are consistently among the bottom five parameters.
-There may be multiple reasons for that but the most likely one may stem from the special case of hospital resource planning in the situation of a pandemic that is the subject of this research. 
-
-%$x_{19}$ 
-For example, \emph{FactorPatientsNormalToDeath} describes a trajectory of patients that never used an intensive care bed. 
-Yet, this factor may be intrinsically related to all parameters that measure for the general level of seriousness of the disease such as \emph{$x_{14}$ FactorPatientsInfectedToHospital}. 
-A higher percentage of infected patients admitted to the hospital implies more complications that need hospital care during the course of the disease. 
-A disease with an expected high rate of complications might also have a higher \emph{$x_{19}$ FactorPatientsNormalToDeath}. 
-The same view would apply to \emph{$x_{2}$	AmntDaysNormalToHealthy} and \emph{$x_{5}$ AmntDaysNormalToDeath}.
-
-
-%In sum, the power of the modeling process stems from its ability to extract meaning from various sources and combine their explanatory power to create a highly predictive simulation. As much as reducing the number of parameters is a valuable step to simplifying the model, eliminating contributing parameters is counterproductive to the overall goals of the \babsimhospital tool. 
-
-%In the case of the \babsimhospital tool, accuracy is essential as it serves public authorities in a real-life critical situation. Therefore, adjusting the default parameter values is valuable for the public. A reduction of the parameters to simplify and speed the modeling process has mostly technical benefits. There is no contribution to the goal of providing accurate estimates of the future hospital resource needs to the public health authorities, and, therefore, cannot be undertaken based on the obtained results in this study.
 \subsubsection*{Conclusion and Outlook}
-In conclusion, although results of this study are highly dependent on the medical data used for the modeling and simulation, the general \gls{SMBSA} approach to parameter evaluation for sensitivity analysis can be applied to any model with a large number of parameters.
-The possibility of \gls{SMBSA} to reuse the same models that were used in an optimization for sensitivity analysis shows clear advantages by simplifying the overall approach.
-Furthermore, the proposed optimization-via-simulation approach is not limited to resource planning problems in hospitals.
-We are currently using a very similar approach to develop new elevator systems and to simulate student flow in academic study periods.
-Finally, we are performing additional benchmark studies to investigate the behavior of alternative \gls{SMBO} approaches and optimizers on this challenging problem.
 The \babsimhospital simulator can be used as attractive simulation and optimization benchmark example. Its source code is open source. 
 
 
