@@ -29,6 +29,7 @@
 \newacronym{CI}{CI}{Continuous Integration}
 \newacronym{CICD}{CI/CD}{Continuous Integration / Continuous Deployment}
 \newacronym{CD}{CD}{Continuous Deployment}
+\newacronym{COVID-19}{COVID-19}{Coronavirus disease 2019}
 \newacronym{DES}{DES}{Discrete Event Simulation}
 \newacronym{DIVI}{DIVI}{Deutsche interdisziplinäre Vereinigung für Intensiv- und Notfallmedizin}
 \newacronym{ECiP}{ECiP}{Evolutionary Computation in Practice}
@@ -36,6 +37,7 @@
 \newacronym{ETL}{ETL}{Extract, Transform, and Load}
 \newacronym{ICU}{ICU}{Intensive Care Unit}
 \newacronym{LHD}{LHD}{Latin Hypercube Design}
+\newacronym{R}{R}{R language and environment for statistical computing and graphics}
 \newacronym{RKI}{RKI}{Robert Koch Institute}
 \newacronym{RMSE}{RMSE}{Root Mean Squared Error}
 \newacronym{RSM}{RSM}{Response surface methodology}
@@ -62,73 +64,50 @@
 \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
-\author{\IEEEauthorblockN{Thomas Bartz-Beielstein}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
+\author{
+\IEEEauthorblockN{
+Thomas Bartz-Beielstein\IEEEauthorrefmark{1},
+Marcel Dröscher\IEEEauthorrefmark{2},
+Alpar Gür\IEEEauthorrefmark{3},
+Alexander Hinterleitner\IEEEauthorrefmark{4},}
+\IEEEauthorblockN{
+Olaf Mersmann\IEEEauthorrefmark{5}, % bin dabei!
+Dessislava Peeva\IEEEauthorrefmark{6},
+Lennard Reese\IEEEauthorrefmark{7},
+Nicolas Rehbach\IEEEauthorrefmark{8},
+}
+\IEEEauthorblockN{
+Frederik Rehbach\IEEEauthorrefmark{9},
+Amrita Sen\IEEEauthorrefmark{10},
+Aleksandr Subbotin\IEEEauthorrefmark{11} and
+Martin Zaefferer\IEEEauthorrefmark{12}
+}
+\IEEEauthorblockA{
+\textit{Inst. Data Science, Engineering, and Analytics} \\
 \textit{TH Köln}, Cologne, Germany \\
-\url{https://orcid.org/0000-0002-5938-5158}}
-\and
-\IEEEauthorblockN{Marcel Dröscher}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-Marcel\_ulrich.droescher@smail.th-koeln.de}
-\and
-\IEEEauthorblockN{Alpar Gür}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-alpar.guer@smail.th-koeln.de}
-\and
-\IEEEauthorblockN{Alexander Hinterleitner}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{TH Köln}, Cologne, Germany \\
-Alexander.Hinterleitner@th-koeln.de}
-\and
-\IEEEauthorblockN{Olaf Mersmann}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-olaf.mersmann@th-koeln.de}
-\and
-\IEEEauthorblockN{Dessislava Peeva}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-dessislava\_todorova.peeva@smail.th-koeln.de}
-\and
-\IEEEauthorblockN{Lennard Reese}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-lennard.reese@smail.th-koeln.de}
-\and
-\IEEEauthorblockN{Nicolas Rehbach}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-nicolas\_alexander.rehbach@smail.th-koeln.de}
-\and
-\IEEEauthorblockN{Frederik Rehbach}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-frederik.rehbach@th-koeln.de}
-\and
-\IEEEauthorblockN{Amrita Sen}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-amrita.sen@gmx.de}
-\and
-\IEEEauthorblockN{Aleksandr Subbotin}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-aleksandr.subbotin@smail.th-koeln.de}
-\and
-\IEEEauthorblockN{Martin Zaefferer}
-\IEEEauthorblockA{\textit{Inst. Data Science, Engineering, and Analytics} \\
-\textit{TH Köln}, Cologne, Germany \\
-martin.zaefferer@th-koeln.de}
+ORC-ID / Email:
+\IEEEauthorrefmark{1}\url{https://orcid.org/0000-0002-5938-5158},
+\IEEEauthorrefmark{2}marcel\_ulrich.droescher@smail.th-koeln.de,\\
+\IEEEauthorrefmark{3}alpar.guer@smail.th-koeln.de,
+\IEEEauthorrefmark{4}Alexander.Hinterleitner@th-koeln.de,
+\IEEEauthorrefmark{5}olaf.mersmann@th-koeln.de,\\
+\IEEEauthorrefmark{6}dessislava\_todorova.peeva@smail.th-koeln.de,
+\IEEEauthorrefmark{7}lennard.reese@smail.th-koeln.de,\\
+\IEEEauthorrefmark{8}nicolas\_alexander.rehbach@smail.th-koeln.de,
+\IEEEauthorrefmark{9}frederik.rehbach@th-koeln.de,
+\IEEEauthorrefmark{10}amrita.sen@gmx.de,\\
+\IEEEauthorrefmark{11}aleksandr.subbotin@smail.th-koeln.de,
+\IEEEauthorrefmark{12}martin.zaefferer@th-koeln.de
+}
 }
 
 \maketitle
 
 \begin{abstract}
-Crises like the COVID-19 pandemic pose a serious challenge to health-care institutions. They need to plan the resources required for handling the increased load, for instance, hospital beds and ventilators. To support the resource planning of local health authorities from the Cologne region, \babsimhospital, a tool for capacity planning based on discrete event simulation,  was created. The predictive quality of the simulation is determined by 29 parameters. Reasonable default values of these parameters were obtained in detailed discussions with medical professionals.  We aim to investigate and optimize these parameters to improve \babsimhospital. First approaches with "out-of-the-box" optimization algorithms failed. Implementing a surrogate-based optimization approach generated useful results in a reasonable time. To understand the behavior of the algorithm and to get valuable insights into the fitness landscape, an in-depth sensitivity analysis was performed.  The sensitivity analysis is crucial for the optimization process because it allows focusing the optimization on the most important parameters.
-    We illustrate how this reduces the problem dimension without compromising the resulting accuracy.
-    The presented approach is applicable to many other real-world problems, e.g., the development of new elevator systems to cover the last mile or simulation of student flow in academic study periods.
+Crises like the COVID-19 pandemic pose a serious challenge to health-care institutions. They need to plan the resources required for handling the increased load, for instance, hospital beds and ventilators. To support the resource planning of local health authorities from the Cologne region, \babsimhospital, a tool for capacity planning based on discrete event simulation,  was created. The predictive quality of the simulation is determined by 29 parameters. Reasonable default values of these parameters were obtained in detailed discussions with medical professionals.  We aim to investigate and optimize these parameters to improve \babsimhospital. First approaches with "out-of-the-box" optimization algorithms failed. Implementing a surrogate-based optimization approach generated useful results in a reasonable time. 
+The adaptation has been shown to reduce simulation errors by nearly 70\%
+
+The presented approach is applicable to many other real-world problems, e.g., the development of new elevator systems to cover the last mile or simulation of student flow in academic study periods.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -145,8 +124,8 @@ This article reports the experiences that were collected over the last 12 months
 \begin{compactenum}[(Q-1)]
 \item How to select a suitable simulation model?
 \item How to find an optimization algorithm that is able to solve noisy, dynamic, high-dimensional real-world problems?
-\item How to integrate domain knowledge?
-\item How to adapt a complex simulation model to a new environment?
+\item How to extend the interface  that enables  usage  of  data  independently  from  the German DIVI  and  RK?
+\item How to integrate domain knowledge and how to adapt a complex simulation model to a new environment?
 \end{compactenum}
 In the following, a holistic approach that demonstrates how tools from evolutionary optimization, simulation, sensitivity analysis, and machine learning can be combined to predict and understand demanding resource allocation problems is presented.
 We illustrate how the pieces can be put together in a complex software project, i.e., we consider the collection of noisy, dynamic, and heterogeneous data, data preprocessing, surrogate models to accelerate simulation, the optimization of the model parameters, and a parameter sensitivity analysis.
@@ -163,9 +142,7 @@ This bottom-up approach, i.e., a \gls{DES}, is used to model the hospital resour
 This simulation requires considerable computational resources.
 Therefore, a very efficient simulator is required, since only a limited number of simulations can be performed in a reasonable time frame.
 We have chosen \gls{simmer}, a \gls{DES} package which enables high-level process-oriented modeling~\citep{Ucar19a}. 
-The code required for running the simulations is published as an open-source R-Package~\citep{Anon21b}.
-%~\cite{bart20rArxiv, bart20t}.
-%TODO: anonymized. Replace for cam-ready.
+The code required for running the simulations is published as an open-source R-Package~\citep{bart20rArxiv, bart20t}.
 
 \gls{simmer} is based on the concept of a trajectory: a common path in the simulation model for entities of the same type.
 Trajectories consist of a list of standardized actions, which define the life cycle of equivalent processes. 
@@ -177,26 +154,27 @@ combines several powerful approaches:
     \item [Model-based optimization:] the  \gls{SPOT} R-package is used to perform  \gls{SMBO} to identify the best values for the 29 parameters in a fast and accurate manner, which results in an optimization-via-simulation approach~\cite{Fu94a}.
 \end{description}
 However, the relatively large number of parameters limits the quality of the optimization process. 
-In addition to the improved validity and performance of the simulation model, the \gls{SMBO} approach generates an important benefit: 
-\begin{description}
-\item[Sensitivity analysis:] results from the  \gls{SMBO}, i.e., models and data, can be directly used to perform a sensitivity analysis~\citep{Salt08b}.
-Because our approach relies heavily on these surrogate models, it will be referred to as \gls{SMBSA}.
-\end{description}
-In that context, the data collected during optimization is analyzed using a Kriging model, a linear model, and a Random Forest model to identify the important parameters as well as parameters that exercise almost no impact on the modeling process. 
-We illustrate a technique for evaluating parameter importance in \babsimhospital.
-These results may also outline a way to reduce problem dimensions without compromising accuracy.
 
 The rest of this paper is structured as follows: 
 Section~\ref{sec:data} discusses the available data and its preparation,
 Section~\ref{sec:sim} introduces the \babsimhospital simulator and 
 Section~\ref{sec:optim} describes the corresponding optimization problem. 
-Section~\ref{sec:sa} presents sensitivity analysis.
-The  experimental setup is presented in Section~\ref{sec:experiments}.
-This section also discusses reproducibility and technical issues.
-Results from the sensitivity analysis are described in Section~\ref{sec:results}.
+Section~\ref{sec:adaptation} describes how domain knowledge can be used to adapt the search boundaries.
+Specifically, we will discuss the availability of ventilated \gls{ICU} bed in Germany and in the UK: Compared to Germany, there is only a small number of ICU beds with ventilation in the UK.
 Finally, the results of this project are discussed in Section~\ref{sec:discussion}.
 
 \section{Automated Data Collection and Curation}\label{sec:data}
+\babsimhospital combines data from two different sources:
+\begin{compactenum}
+\item simData: simulation data, i.e., input data for the simulation. The onlinve version of the \babsimhospital simulator use s data from the \gls{RKI}.
+\item fieldData: real data, i.e., data from the DIVI-Intensivregister. The 
+  field data will be used for validating the simulation output. 
+\end{compactenum}
+Statistically speaking, the \babsimhospital simulator models 
+ resources usage in hospitals, e.g., number of \gls{ICU} beds ($y$), as a function 
+of the number of infected individuals ($x$).
+In addition to the number of infections, information about age and gender can be used as simulation input.
+
 \gls{ETL} processes integrate data from various sources into complex collections. 
 A typical problem is ``that each data source has its distinct set of characteristics 
 that need to be managed in order to effectively extract data for the \gls{ETL} process''~\citep{ELSAPPAGH201191}. 
@@ -204,24 +182,13 @@ After the successful extraction of data, the next step is to transform it.
 This step includes several approaches to gain accurate data which is correct, complete, consistent, and unambiguous.  
 The final step consists of loading the processed data into a data collection of choice accessible for the data analyst for further use.
 Especially in terms of the COVID-19 pandemic, it is important to integrate and process the vast amount of constantly growing data. 
-Therefore, \babsimhospital implements an \gls{ETL} process to analyze the data from the \gls{RKI}, \url{https://www.rki.de}, as well as the \gls{DIVI}, \url{https://www.divi.de}).
-The associated data sets contain anonymous information about every recorded case in Germany. The \gls{RKI} data set contains 
-780,065 observations of 18 variables such as age, gender, data of infection, etc., which were updated daily and are automatically integrated into \babsimhospital. 
 
-Information concerning \gls{ICU} in Germany can be retrieved from the \gls{DIVI}.
-\gls{DIVI} provides an API and a daily report. The API does not provide all data the daily report consists of and therefore is not a viable option for this project.
-Web scraping was implemented as a reliable solution to retrieve the most current daily report from \gls{DIVI}.
+\subsubsection{Germany}
 
-The official simulator, which can be accessed via \url{https://www.th-koeln.de/babsimhospital}, uses \gls{DIVI} and \gls{RKI} data.
-Its parameters are based on discussions with experts from Germany, especially \gls{ICU} doctors and experts from health administration.
-The online version is described in Section~\ref{sec:online}.
-
-This paper describes an extension of the interface that enables usage of data independently from \gls{DIVI} and \gls{RKI} data, i.e., an interface to csv files and excel files can be uses so that any kind of field and simulation data can be processed, simulated, and optimized.
-To demonstrated our approach, anonymised data from a region in the UK was used. T
 
 \begin{figure*}
     \centering
-    \includegraphics[width=0.75\linewidth]{rkidata.png}
+    \includegraphics[width=0.75\linewidth]{infections.png}
     \caption{}
 \label{fig:rki}
 \end{figure*}
@@ -233,13 +200,79 @@ To demonstrated our approach, anonymised data from a region in the UK was used. 
 \label{fig:divi}
 \end{figure*}
 
-\section{The Simulator}\label{sec:sim}
-\subsection{The Simulation Model}
 
+\babsimhospital implements an \gls{ETL} process to analyze the data from the \gls{RKI}, \url{https://www.rki.de}, as well as the \gls{DIVI}, \url{https://www.divi.de}).
+The associated data sets contain anonymous information about every recorded case in Germany. The \gls{RKI} data set contains 
+780,065 observations of 18 variables such as age, gender, data of infection, etc., which were updated daily and are automatically integrated into \babsimhospital. 
+
+Information concerning \gls{ICU} in Germany can be retrieved from the \gls{DIVI}.
+\gls{DIVI} provides an API and a daily report. The API does not provide all data the daily report consists of and therefore is not a viable option for this project.
+Web scraping was implemented as a reliable solution to retrieve the most current daily report from \gls{DIVI}.
+
+The official simulator, which can be accessed via \url{https://www.th-koeln.de/babsimhospital}, uses \gls{DIVI} and \gls{RKI} data.
+Its parameters are based on discussions with experts from Germany, especially \gls{ICU} doctors and experts from health administration.
+The online version is described in Section~\ref{sec:online}.
+
+
+
+\subsubsection{UK}
+This paper describes an extension of the interface that enables usage of data independently from \gls{DIVI} and \gls{RKI} data, i.e., an interface to csv files and excel files can be uses so that any kind of field and simulation data can be processed, simulated, and optimized.
+To demonstrated our approach, anonymised data from a region in the UK was used. 
+
+Read data from Excel file.
+The UK data consists of the following entries:
+\begin{compactitem}
+\item Date
+\item bed: Total COVID inpatient = total in hospital (includes ICU)
+\item intensiveBed: COVID-19 Non-invasive = patients on non-invasive ventilators (CPAP). In theory these should be on ICU but we don’t have space for them all. The model should probably consider them to be ICU but not intubated (level 2)
+\item intensiveBedVentilation: COVID-19 Ventilated = patients ventilated and intubated on ICU
+\end{compactitem}
+The field data based on UK data used three bed categories: 
+\begin{compactenum}
+\item bed: non ICU patients in hospital
+\item intensiveBed: ICU bed without ventilation
+\item intensiveBedVentilation: \gls{ICU} bed with ventilation
+\end{compactenum}
+Figure~\ref{fig:ukdata} visualizes the UK data set that is used in this study. The whole data set consists of data from 240 days. Since our analysis considers the second \gls{COVID-19} wave only, we use data after after September 2020.
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.75\linewidth]{ukdata3.png}
+    \caption{UK data. Dots denote real-world data, red lines represent the seven-day average. \gls{ICU} beds with ventilation are shown in the last row. Compared to Germany, there is only a small number of \gls{ICU} beds with ventilation in the UK.}
+\label{fig:ukdata}
+\end{figure*}
+
+
+
+\section{The Simulator}\label{sec:sim}
+\subsection{Discrete Event Simulation}
 \babsimhospital simulates the typical paths that COVID-19 infected patients follow during their hospital stays. 
 The \gls{DES} processes every single recorded infection until the patients' recovery or death. 
 Patients follow a trajectory, i.e., they move with a probability $p_{ij}$ from state $S_i$ to state $S_j$  after a transition-specific duration $d_{ij}$.
-A graph can be used to model this behavior (\figref{fig:prob}).
+\babsimhospital includes tools to analyse parameter settings.
+Parameter settings consist of
+\begin{compactitem}
+\item transition probabilities, e.g., the probability that an infected
+   individual has to go to the hospital. 
+\item  durations, e.g., the time span until an infected individual goes to the
+   hospital (in days). 
+\end{compactitem}
+A graph can be used to model this behavior.
+Figure~\figref{fig:prob} illustrates the transition probabilities.
+The states are as follows:
+\begin{compactenum}
+\item infec: infected
+\item out: transfer out, no hospital required
+\item hosp: hospital
+\item normal: normal station, no ICU
+\item intens: ICU (without ventilation)
+\item vent: ICU ventilated
+\item intafter: intensive aftercare (from ICU with ventilation, on ICU)
+\item aftercare: aftercare (from ICU,  on normal station)
+\item death: patient dies
+\item healthy: recovered
+\end{compactenum}
+ 
+
 
 
 \begin{figure*}
@@ -271,6 +304,8 @@ We use an exponential function to model the relationship between the age of the 
 That means that older patients have a much higher probability of requiring an intensive bed or an intensive bed with ventilation than younger patients. 
 In addition, men have a 50 percent higher risk than women. 
 
+
+
 Proper tuning of these parameters is essential to obtain accurate predictions based on up-to-date and local data. 
 The time-dependent changes require a frequent refitting of the model parameters to the current situation.
 Thus, a daily parameter tuning procedure is run for each German region in order to provide an accurate prediction with \babsimhospital. 
@@ -292,12 +327,12 @@ Although the tool was designed to assist the German local authorities, it was al
 
 
 \subsection{The Online-Version}\label{sec:online}
-
+%%% TODO: Besser formulieren, mit Abbildung verknuepfen
 See Fig.~\ref{fig:demo}
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\linewidth]{demo.png}
+    \includegraphics[width=\linewidth]{demoFR.png}
     \caption{Online version. }
 \label{fig:demo}
 \end{figure*}
@@ -326,7 +361,12 @@ Last, but not least, administration and management can benefit from \babsimhospi
 \item Personnel planning: medical and nursing staff
 \end{compactitem}
 
+\subsection{Open Source}
+\babsimhospital is open source. It is programmed in the R language and environment for statistical computing and graphics and freely available, see~\cite{bart20t}.
+
+
 \section{Optimization}\label{sec:optim}
+Optimization tries to improve the \gls{RMSE} as defined in Eq.~\ref{eq:rmse}.
 After the optimization-via-simulation problem is defined, this section describes the current state in optimization and discusses the selection of a suitable optimizer. 
 
 \subsection{Optimization Problem}
@@ -340,8 +380,7 @@ We formulate the \emph{minimization} problem:
 \end{equation}
 Here, $T$ denotes the number of days simulated and $k$ the three different bed categories.
 Since the different bed types are not equally important a weighted average of the \gls{RMSE} for each bed category is used as the final error measure.
-A detailed description can be found in~\cite{Anon21a}.
-% ~\citep{Bart20j}.
+A detailed description can be found in~\citep{Bart20j}.
 
 The extensive amount of data that the tool has to process combined with the high dimensionality of the problem, and the required accuracy make simplifying the modeling process to improve performance a big challenge.
 The limited time available for each optimization run requires the use of efficient algorithms.
@@ -395,26 +434,91 @@ Therefore, the \gls{SPOT} algorithm was chosen~\citep{Bart17parxiv}.
 To accelerate the \gls{SPOT}, simulations were run in parallel.
 Besides robust and relatively fast optimizations, \gls{SPOT} provides an additional advantage: surrogate models used by the optimizer can be used (``recycled'') for a sensitivity analysis. 
 
-\section{Optimization}\label{sec:sa}
+\section{Adaptation of the Search Boundaries}\label{sec:adaptation}
 \subsection{Germany}
 
 
 
 \subsection{United Kingdom}
-The situation in UK differs significant compared to the situation in Germany, because the number of ventilated ICU beds is much smaller in the UK. 
-Therefore, patients are treated differently. 
+Compared to Germany, there is only a small number of ICU beds with ventilation in the UK.
+Therefore, patients are treated differently: the percentage of patients sent to \gls{ICU} with ventilation should be reduced.
+We will adopt the boundaries of the search space (constraints) to reduce the probabilities.
+
+\subsubsection{First Adaptation: Reducing Probabilities}
+Table~\ref{tab:para} presents an overview of the parameter ranges of the 29 parameters used in the \babsimhospital simulation model.
+
+% latex table generated in R 4.0.4 by xtable 1.8-4 package
+% Tue Feb 23 15:02:12 2021
+\begin{table*}[ht]\label{tab:para}
+\caption{Default and adapted parameter ranges.}
+\centering
+\begin{tabular}{llrrrrr}
+  \hline
+Variable & Name & default & minUK & maxUK & minDE & MaxDE \\ 
+  \hline
+$x_1$&  AmntDaysInfectedToHospital & 9.50 & 6.00 & 14.00 & 6.00 & 14.00 \\ 
+$x_2$&   AmntDaysNormalToHealthy & 10.00 & 7.00 & 13.00 & 7.00 & 13.00 \\ 
+$x_3$&   AmntDaysNormalToIntensive & 5.00 & 3.00 & 7.00 & 3.00 & 7.00 \\ 
+$x_4$&  AmntDaysNormalToVentilation & 3.63 & 3.00 & 9.00 & 3.00 & 9.00 \\ 
+$x_5$&   AmntDaysNormalToDeath & 5.00 & 3.00 & 7.00 & 3.00 & 7.00 \\ 
+$ \mathbf{x_6}$&   \textbf{AmntDaysIntensiveToAftercare} & $\mathbf{7.00}$ & $\mathbf{10.00}$ & $\mathbf{18.00}$ & $\mathbf{5.00}$ & $\mathbf{9.00}$ \\ 
+$\mathbf{x_7}$ &   \textbf{AmntDaysIntensiveToVentilation} & $\mathbf{4.00}$ & $\mathbf{6.00}$ & $\mathbf{10.00}$ & $\mathbf{3.00}$ & $\mathbf{5.00}$ \\ 
+$\mathbf{x_8}$&   \textbf{AmntDaysIntensiveToDeath} & $\mathbf{5.00}$ & $\mathbf{6.00}$ & $\mathbf{14.00}$ & $\mathbf{3.00}$  & $\mathbf{7.00}$ \\ 
+$x_9$&   AmntDaysVentilationToIntensiveAfter & 30.00 & 25.00 & 35.00 & 25.00 & 35.00 \\ 
+$x_{10}$&   AmntDaysVentilationToDeath & 20.00 & 17.00 & 25.00 & 17.00 & 25.00 \\ 
+$x_{11}$&   AmntDaysIntensiveAfterToAftercare & 3.00 & 2.00 & 5.00 & 2.00 & 5.00 \\ 
+$x_{12}$&   AmntDaysIntensiveAfterToDeath & 4.00 & 1.00 & 7.00 & 1.00 & 7.00 \\ 
+$x_{13}$&   GammaShapeParameter & 1.00 & 0.25 & 2.00 & 0.25 & 2.00 \\ 
+$x_{14}$&   FactorPatientsInfectedToHospital & 0.10 & 0.05 & 0.15 & 0.05 & 0.15 \\ 
+$x_{15}$&   FactorPatientsHospitalToIntensive & 0.09 & 0.07 & 0.11 & 0.07 & 0.11 \\ 
+$ \mathbf{x_{16}}$ & \textbf{FactorPatientsHospitalToVentilation} & $ \mathbf{0.01}$ & $ \mathbf{0.001}$ & $ \mathbf{0.002} $& $ \mathbf{0.01}$ & $ \mathbf{0.02}$ \\ 
+$x_{17}$&   FactorPatientsNormalToIntensive & 0.10 & 0.07 & 0.13 & 0.07 & 0.13 \\ 
+$\mathbf{x_{18}}$&   \textbf{FactorPatientsNormalToVentilation} & $\mathbf{0.00}$ & $\mathbf{1e-05}$ & $\mathbf{0.0002}$ & $\mathbf{1e-04}$ & $\mathbf{ 0.0020}$ \\ 
+$x_{19}$&   FactorPatientsNormalToDeath & 0.10 & 0.08 & 0.12 & 0.08 & 0.12 \\ 
+$\mathbf{x_{20}}$&   \textbf{FactorPatientsIntensiveToVentilation} & $\mathbf{0.30}$ & $\mathbf{0.03}$ & $\mathbf{0.03}$ & $\mathbf{0.25}$ & $\mathbf{0.35}$ \\ 
+$x_{21}$&   FactorPatientsIntensiveToDeath & 0.10 & 0.08 & 0.12 & 0.08 & 0.12 \\ 
+$x_{22}$&   FactorPatientsVentilationToIntensiveAfter & 0.70 & 0.50 & 0.90 & 0.50 & 0.90 \\ 
+$x_{23}$&   FactorPatientsIntensiveAfterToDeath & 0.00 & 0.00 & 0.01 & 0.00 & 0.01 \\ 
+$x_{24}$&   AmntDaysAftercareToHealthy & 3.00 & 2.00 & 4.00 & 2.00 & 4.00 \\ 
+$x_{25}$&   RiskFactorA & 0.02 & 0.00 & 1.10 & 0.00 & 1.10 \\ 
+$x_{26}$&   RiskFactorB & 0.01 & 0.00 & 0.06 & 0.00 & 0.06 \\ 
+$x_{27}$&   RiskMale & 1.50 & 1.00 & 2.00 & 1.00 & 2.00 \\ 
+$x_{28}$&   AmntDaysIntensiveAfterToHealthy & 3.00 & 2.00 & 5.00 & 2.00 & 5.00 \\ 
+$x_{29}$&   FactorPatientsIntensiveAfterToHealthy & 0.67 & 0.50 & 0.75 & 0.50 & 0.75 \\ 
+   \hline
+\end{tabular}
+\end{table*}
+
 
 To implement the different setting, we modified the parameter boundaries as follows: the ICU with ventilation node has three incoming edges (hospital to icu vent, normal station to icu vent, and icu station to icu vent).
 By introducing a reduction factor, say  $c_1 \in \mathbb{R_+}$, that simply multiplies the default probabilities of patients reaching the icu ventilated node, we were able to redirect patients to other bed categories. 
 Choosing a value of $c_1=0.1$ results in improved simulation outputs. Please note that $c_1$ does not directly affect the probabilities, it modifies the search boundaries (constraints) of the optimizer.
 
-Simulation results of the ventilated icu beds were significantly improved (both: numerical RMSE and visual inspection as con be seen in Fig.~\ref{fig:optimized}.
+Simulation results of the ventilated icu beds were significantly improved (both: numerical RMSE and visual inspection as can be seen in Fig.~\ref{fig:optimized}.
+
+
+\begin{compactitem} 
+\item[$x_{16}$:] The range of the parameter \texttt{Factor\-Patients\-Hospital\-To\-Ventilation}  was reduced from $[0.01; 0.02]$ to $[5.0e-04; 0.0020]$. 
+\item[$x_{18}$:] The range of the parameter \texttt{Factor\-Patients\-Normal\-To\-Ventilation} was reduced from $[0.1; 0.2]$ to $[0.01; 0.02]$. 
+\item[$x_{20}$:] The range of the parameter \texttt{Factor\-Patients\-Intensive\-To\-Ventilation} was reduced from $[0.1; 0.2]$ to $[0.01; 0.02]$. 
+\end{compactitem}
+
+
+\subsubsection{Second Adaptation: Increasing Durations}
 
 However, even if the ventilated icu bed usage was improved (bed category III), the simulation of the second bed category is not satisfying. We under estimate the number of icu beds.
 To fix this problem, we modified the duration of patients in icu beds: the search intervals of theses parameters were increased. Therefore, a second factor, say $c_2 \in \mathbb{R}_+$ was introduced to multiply the corresponding durations. A value of $c_2 = 2.0$ was chosen for our experiments.
 
 
 
+\begin{compactitem} 
+\item[$x_{6}$:] The range of the parameter \texttt{AmntDays\-Intensive\-To\-Aftercare} was increased from $[5;9]$ to $[10;18]$ days.
+\item[$x_{7}$:] The parameter \texttt{AmntDays\-Intensive\-To\-Ventilation} was increased from $[3;5]$ to $[6;10]$ days.
+\item[$x_{8}$:] The parameter \texttt{AmntDays\-Intensive\-To\-Death} was increased from $[3;7]$ to $[6;14]$ days.
+\end{compactitem}
+
+
+\section{Results}\label{sec:results}
 \begin{figure*}
   \centering
    \includegraphics[width=0.7\textwidth]{default.png}
@@ -438,15 +542,11 @@ To fix this problem, we modified the duration of patients in icu beds: the searc
 \label{fig:optimized}
 \end{figure*}
 
-\section{Results}\label{sec:results}
+The adaptation of the parameter bounds based on domain knowledge results in a significant reduction of the \gls{RMSE}, which was defined in  Eq.~\ref{eq:rmse}. 
+Using the default \babsimhospital parameter boundaries, which were based on the situation in Germany, the simulation error is $\epsilon_0 = 184.10$.
+The first adaptation, which reduces the percentage of patients treated in \gls{ICU} beds with ventilation, results in an simulation error $\epsilon_1 =  55.67$, whereas the second adaption, which increases the duration patients in \gls{ICU} bed results in a further reduction of the simulation error to $\epsilon_2 = 28.10$. In summary, the adaptation has been shown to reduce simulation errors by nearly 70\%.
 
-
-\begin{compactitem} 
-\item[$x_{6}$:] The parameter 
-\item[$x_{7}$:] The parameter
-\item[$x_{8}$:] The parameter \
-\end{compactitem}
-
+Figures~\ref{fig:default}, \ref{fig:optimized01}, and \ref{fig:optimized} clearly visualize the improvements.
 
 
 \section{Discussion and Outlook}\label{sec:discussion}
