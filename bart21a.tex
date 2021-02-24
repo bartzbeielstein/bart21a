@@ -30,6 +30,7 @@
 \newacronym{CICD}{CI/CD}{Continuous Integration / Continuous Deployment}
 \newacronym{CD}{CD}{Continuous Deployment}
 \newacronym{COVID-19}{COVID-19}{Coronavirus disease 2019}
+\newacronym{CPAP}{CPAP}{Continuous positive airway pressure}
 \newacronym{CSV}{CSV}{Comma-separated Value}
 \newacronym{DES}{DES}{Discrete Event Simulation}
 \newacronym{DIVI}{DIVI}{Deutsche interdisziplinäre Vereinigung für Intensiv- und Notfallmedizin}
@@ -161,7 +162,12 @@ The \babsimhospital simulator models
  resources usage in hospitals, e.g., number of \gls{ICU} beds ($y$), as a function 
 of the number of infected individuals ($x$).
 In addition to the number of infections, information about age and gender can be used as simulation input.
-
+\begin{figure*}[tb]
+    \centering
+    \includegraphics[width=0.97\linewidth]{rkiDiviData.png}
+    \caption{}
+\label{fig:rki}
+\end{figure*}
 \gls{ETL} processes integrate data from various sources into complex collections~\citep{ELSAPPAGH201191}. 
 After the successful extraction of data, the next step is to transform it. 
 This step includes several approaches to gain accurate data which is correct, complete, consistent, and unambiguous.  
@@ -169,15 +175,6 @@ The final step consists of loading the processed data into a data collection of 
 Especially in terms of the COVID-19 pandemic, it is important to integrate and process the vast amount of constantly growing data. 
 
 \subsubsection{Germany}
-
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.97\linewidth]{rkiDiviData.png}
-    \caption{}
-\label{fig:rki}
-\end{figure*}
-
 The on-line version of the \babsimhospital simulator implements an \gls{ETL} process to analyze the data from the \gls{RKI}, \url{https://www.rki.de}, as well as the \gls{DIVI}, \url{https://www.divi.de}.
 The associated data sets contain anonymous information about every recorded case in Germany. The \gls{RKI} data set contains 
 780,065 observations of 18 variables such as age, gender, data of infection, etc., which were updated daily and are automatically integrated into \babsimhospital. 
@@ -190,6 +187,13 @@ The online version is described in Section~\ref{sec:online}.
 
 
 \subsubsection{UK}
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.75\linewidth]{ukdata3.png}
+    \caption{UK data. Dots denote real-world data, red lines represent the seven-day average. \gls{ICU} beds with ventilation are shown in the last row. The UK has far fewer \gls{ICU} ventilator beds than Germany.}
+\label{fig:ukdata}
+\end{figure*}
+
 This paper describes an extension of the interface that enables usage of data independently from \gls{DIVI} and \gls{RKI} data, i.e., an interface to \gls{CSV} files and Excel files can be used so that any kind of field and simulation data can be processed, simulated, and optimized.
 To exemplify our approach, anonymised data from a region in the UK was used. 
 The data was read from an Excel file, which has the following entries (columns):
@@ -206,12 +210,6 @@ The field data based on UK data used three bed categories:
 \item intensiveBedVentilation: \gls{ICU} bed with ventilation
 \end{compactenum}
 Figure~\ref{fig:ukdata} visualizes the UK data set that is used in this study. The whole data set consists of data from 240 days. Since our analysis considers the second \gls{COVID-19} wave only, we use data after September 2020.
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.75\linewidth]{ukdata3.png}
-    \caption{UK data. Dots denote real-world data, red lines represent the seven-day average. \gls{ICU} beds with ventilation are shown in the last row. The UK has far fewer \gls{ICU} ventilator beds than Germany.}
-\label{fig:ukdata}
-\end{figure*}
 
 
 
@@ -387,6 +385,25 @@ Therefore, the \gls{SPOT} algorithm was chosen~\citep{Bart17parxiv}.
 To accelerate the \gls{SPOT}, simulations were run in parallel. 
 
 \section{Adaptation of the Search Boundaries}\label{sec:adaptation}
+
+\begin{figure*}[t]
+  \centering
+   \includegraphics[width=0.49\textwidth]{default.png}
+    \includegraphics[width=0.49\textwidth]{optimzed01b.png}
+  \caption{\emph{Left:}\/ Real data compared to results from the \babsimhospital simulation with default parameters. Large residuals (errors), especially for normal bed and ICU beds with ventilation can be observed.
+   \babsimhospital uses default parameter sets. These are based on domain knowledge (recommendations from doctors) from Germany. \emph{Right:}\/ Real data compared to results from the \babsimhospital simulation with optimized parameters. The  $c_1$ value was set to $0.2$. Considering the regular \gls{ICU} beds (category II) there is still a difference between the real data and the simulated data. Therefore, a second adaption was necessary. }
+\label{fig:default}
+\end{figure*}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.49\textwidth]{optimized02.png}
+    \caption{Real data compared to results from the \babsimhospital simulation with optimized parameters. The comparison with the results from Fig.~\ref{fig:default} shows a significant improvement. Residuals are much smaller,
+    because the simulation model parameters were adapted to the situation in UK hospitals. Additionally, simulation results for category II beds is improved.  
+  }
+\label{fig:optimized02}
+\end{figure}
+
+
 The UK has markedly fewer ICU beds than Germany (6.6 per 100,000 versus 29.2 per 100,000 in 2011  \cite{rhodes_variability_2012}).
 Therefore, patients may be treated differently: the clinical threshold for a patient to be admitted to ICU may be higher than in Germany. We can adapt the boundaries of the search space (constraints) to reduce the probability of a patient being sent to \gls{ICU}.
 
@@ -410,13 +427,9 @@ parameter $x_{7}$  that defines the  number of days before ICU  patients go to I
 
 
 \section{Results}\label{sec:results}
-\begin{figure*}
-  \centering
-   \includegraphics[width=0.7\textwidth]{default.png}
-  \caption{Real data compared to results from the \babsimhospital simulation with default parameters. Large residuals (errors), especially for normal bed and ICU beds with ventilation can be observed.
-   \babsimhospital uses default parameter sets. These are based on domain knowledge (recommendations from doctors) from Germany. }
-\label{fig:default}
-\end{figure*}
+
+
+
 
 % this figure was replaced by fig optimized01b, which uses a factor of 5 (0.2):
 %\begin{figure*}
@@ -426,27 +439,20 @@ parameter $x_{7}$  that defines the  number of days before ICU  patients go to I
 %\label{fig:optimized01}
 %\end{figure*}
 
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.7\textwidth]{optimzed01b.png}
-    \caption{Real data compared to results from the \babsimhospital simulation with optimized parameters. The  $c_1$ value was set to $0.2$. Considering the regular \gls{ICU} beds (category II) there is still a difference between the real data and the simulated data. Therefore, a second adaption was necessary.
-  }
-\label{fig:optimized01b}
-\end{figure*}
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.7\textwidth]{optimized02.png}
-    \caption{Real data compared to results from the \babsimhospital simulation with optimized parameters. The comparison with the results from Fig.~\ref{fig:default} shows a significant improvement. Residuals are much smaller,
-    because the simulation model parameters were adapted to the situation in UK hospitals. Additionally, simulation results for category II beds is improved.  
-  }
-\label{fig:optimized02}
-\end{figure*}
+%\begin{figure*}[tb]
+%    \centering
+%    \includegraphics[width=0.49\textwidth]{optimzed01b.png}
+%    \caption{Real data compared to results from the \babsimhospital simulation with optimized parameters. The  $c_1$ value was set to $0.2$. Considering the regular \gls{ICU} beds (category II) there is still a difference between the real data and the simulated data. Therefore, a second adaption was necessary.
+%  }
+% \label{fig:optimized01b}
+% \end{figure*}
+
+
 
 The adaptation of the parameter bounds based on domain knowledge results in a significant reduction of the \gls{RMSE}, which was defined in  Eq.~\ref{eq:rmse}. 
 Using the default \babsimhospital parameter boundaries, which were based on the situation in Germany, the simulation error is $\epsilon_0 = 184.10$.
 The first adaptation, which reduces the percentage of patients treated in \gls{ICU} beds with ventilation, results in an simulation error $\epsilon_1 =  46.94$, whereas the second adaption, which increases the time patients spend in an \gls{ICU} bed results in a further reduction of the simulation error to $\epsilon_2 = 29.0$. In summary, the adaptation has been shown to reduce simulation errors by nearly 70\%.
-
-Figures~\ref{fig:default}, \ref{fig:optimized01b}, and \ref{fig:optimized02} clearly visualize the improvements.
+Figures~\ref{fig:default} and \ref{fig:optimized02} clearly visualize the improvements.
 
 
 \section{Discussion and Outlook}\label{sec:discussion}
@@ -465,7 +471,10 @@ The questions posed in Section~\ref{sec:intro} can be answered as follows:
 \item The extended version of the \babsimhospital interface is able to process any input data that contains information about the date, the number of beds (this information is optional), the number of patients on non-invasive ventilation, and the number of patients intubated and ventilated. Using real-world data from the UK, we successfully demonstrated how these data can be processed by the simulator. Simulations with \babsimhospital are not restricted to the health system in Germany.
 \item This study clearly demonstrates that domain knowledge is essential for obtaining reliable and valid simulation results. Especially in high dimensional search spaces, optimizers can deliver results that are mathematically optimal, but practically irrelevant. The discussion delivers important insights into the problem. 
 \end{compactenum}
-The \babsimhospital simulator can be used as attractive simulation and optimization benchmark example. Its source code is open source. 
+Furthermore the \babsimhospital simulator can be used as attractive simulation and optimization benchmark example. Its source code is open source. 
+Knowing the optimiser's output in terms of number of days for each transition in the model, and their probability, is interesting to clinicians. Plausibly it could help compare treatment strategies where hospitals have acted differently. For example, some hospitals used a lot of \gls{CPAP} but other centres used less and therefore had to move earlier to ventilation.
+One particular advantage of modelling in the UK has been estimating how much spare capacity there is in hospitals for continuing elective surgery such as arranging cancer operations etc.
+
 
 %% TODO: finally, we have to change this and use simple brackets :-( 
 \bibliographystyle{ACM-Reference-Format}
